@@ -1,0 +1,41 @@
+{
+	"arrowParens": "always",
+	"bracketSameLine": true,
+	"bracketSpacing": false,
+	"semi": true,
+	"experimentalTernaries": false,
+	"singleQuote": true,
+	"jsxSingleQuote": false,
+	"quoteProps": "as-needed",
+	"trailingComma": "all",
+	"singleAttributePerLine": false,
+	"htmlWhitespaceSensitivity": "css",
+	"vueIndentScriptAndStyle": false,
+	"proseWrap": "preserve",
+	"insertPragma": false,
+	"requirePragma": false,
+	"tabWidth": 4,
+	"useTabs": true,
+	"embeddedLanguageFormatting": "auto",
+	"printWidth": 100,
+	"plugins": [
+		"@trivago/prettier-plugin-sort-imports"
+	],
+	"importOrder": [
+		"react-native",
+		"react-native/(.*)$",
+		"^@/components/(.*)$",
+		"^@/constants/(.*)$",
+		"^@/helpers/(.*)$",
+		"^@/hooks/(.*)$",
+		"^@/services/(.*)$",
+		"^@/states/(.*)$",
+		"^@/middlewares/(.*)$",
+		"^@/pages/(.*)$",
+		"^@/styles/(.*)$",
+		"^@/libs/(.*)$",
+		"^@/(.*)$"
+	],
+	"importOrderSeparation": true,
+	"importOrderSortSpecifiers": true
+}
