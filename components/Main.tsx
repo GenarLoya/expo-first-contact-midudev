@@ -1,5 +1,5 @@
 import {LatestGame, getLatestGames} from '../lib/metacritic';
-import GameCard, {AnimatedGameCard} from './GameCard';
+import GameCard, {AnimatedGameCard} from './Game/GameCard';
 import {Logo} from './Logo';
 import {StatusBar} from 'expo-status-bar';
 import {useEffect, useState} from 'react';

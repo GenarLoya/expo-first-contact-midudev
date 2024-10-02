@@ -1,3 +1,4 @@
+import {GameScore} from './GameScore';
 import {useEffect, useRef} from 'react';
 
 import {Animated, Image, StyleSheet, Text, View} from 'react-native';
@@ -8,6 +9,7 @@ export default function GameCard({game}) {
 	return (
 		<View key={game.slug} style={styles.card}>
 			<Text style={styles.title}>{game.title}</Text>
+			<GameScore score={game.score} maxScore={100} />
 			<View style={styles.body}>
 				<Image source={{uri: game.image}} style={styles.image} />
 				<Text style={styles.description}>
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#303640',
 		padding: 10,
 		margin: 10,
-		gap: 10,
+		gap: 5,
 	},
 	title: {
 		fontSize: 20,
