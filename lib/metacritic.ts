@@ -7,6 +7,21 @@ export type LatestGame = {
 	image: string;
 };
 
+export type LatestGameDataOrigin = {
+	description: string;
+	releaseDate: string;
+	score: number;
+	slug: string;
+	title: string;
+	image: {
+		bucketType: string;
+		bucketPath: string;
+	};
+	criticScoreSummary: {
+		score: number;
+	};
+};
+
 export async function getLatestGames(): Promise<LatestGame[]> {
 	const LATEST_GAMES =
 		'https://internal-prod.apigee.fandom.net/v1/xapi/finder/metacritic/web?sortBy=-metaScore&productType=games&page=1&releaseYearMin=1958&releaseYearMax=2024&offset=0&limit=24&apiKey=1MOZgmNFxvmljaQR1X9KAij9Mo4xAY3u';
@@ -18,7 +33,7 @@ export async function getLatestGames(): Promise<LatestGame[]> {
 		data: {items},
 	} = json;
 
-	return items.map((item) => {
+	return items.map((item: LatestGameDataOrigin) => {
 		const {description, slug, releaseDate, image, criticScoreSummary, title} = item;
 		const {score} = criticScoreSummary;
 
@@ -29,7 +44,7 @@ export async function getLatestGames(): Promise<LatestGame[]> {
 		return {
 			description,
 			releaseDate,
-			score: Math.round(Math.random() * 100),
+			score,
 			slug,
 			title,
 			image: img,
@@ -37,7 +52,7 @@ export async function getLatestGames(): Promise<LatestGame[]> {
 	});
 }
 
-export async function getGameDetails(slug) {
+export async function getGameDetails(slug: string) {
 	const GAME_DETAILS = `https://internal-prod.apigee.fandom.net/v1/xapi/composer/metacritic/pages/games/${slug}/web?&apiKey=1MOZgmNFxvmljaQR1X9KAij9Mo4xAY3u`;
 
 	const rawData = await fetch(GAME_DETAILS);
@@ -48,14 +63,14 @@ export async function getGameDetails(slug) {
 	const {score} = criticScoreSummary;
 
 	// get the card image
-	const cardImage = images.find((image) => image.typeName === 'cardImage');
+	const cardImage = images.find((image: any) => image.typeName === 'cardImage');
 	const {bucketType, bucketPath} = cardImage;
 	const img = `https://www.metacritic.com/a/img/${bucketType}${bucketPath}`;
 
 	const rawReviews = components[3].data.items;
 
 	// get the reviews
-	const reviews = rawReviews.map((review) => {
+	const reviews = rawReviews.map((review: any) => {
 		const {quote, score, date, publicationName, author} = review;
 		return {quote, score, date, publicationName, author};
 	});

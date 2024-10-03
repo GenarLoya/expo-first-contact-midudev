@@ -1,26 +1,34 @@
+import {LatestGame} from '../../lib/metacritic';
 import {GameScore} from './GameScore';
+import {Link} from 'expo-router';
 import {useEffect, useRef} from 'react';
 
-import {Animated, Image, StyleSheet, Text, View} from 'react-native';
+import {Animated, Image, Pressable, StyleSheet, Text, View} from 'react-native';
 
 const DESCRIPTION_CHAR_LIMIT = 250;
 
-export default function GameCard({game}) {
+export default function GameCard({game}: {game: LatestGame}) {
 	return (
-		<View key={game.slug} style={styles.card}>
-			<Text style={styles.title}>{game.title}</Text>
-			<GameScore score={game.score} maxScore={100} />
-			<View style={styles.body}>
-				<Image source={{uri: game.image}} style={styles.image} />
-				<Text style={styles.description}>
-					{game.description.slice(0, DESCRIPTION_CHAR_LIMIT) + '...'}
-				</Text>
-			</View>
-		</View>
+		<Link asChild href={`/game/${game.slug}`}>
+			<Pressable key={game.slug} style={styles.card}>
+				{({pressed}) => (
+					<View key={game.slug} style={[styles.card, {opacity: pressed ? 0.5 : 1}]}>
+						<Text style={styles.title}>{game.title}</Text>
+						<GameScore score={game.score} maxScore={100} />
+						<View style={styles.body}>
+							<Image source={{uri: game.image}} style={styles.image} />
+							<Text style={styles.description}>
+								{game.description.slice(0, DESCRIPTION_CHAR_LIMIT) + '...'}
+							</Text>
+						</View>
+					</View>
+				)}
+			</Pressable>
+		</Link>
 	);
 }
 
-export function AnimatedGameCard({game, index}) {
+export function AnimatedGameCard({game, index}: {game: LatestGame; index: number}) {
 	const opacity = useRef(new Animated.Value(0)).current;
 
 	useEffect(() => {

@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 
-const getBarColor = (score) => {
+const getBarColor = (score: number) => {
 	if (score < 50) {
 		return '#C63636';
 	} else if (score < 70) {
@@ -12,7 +12,7 @@ const getBarColor = (score) => {
 	}
 };
 
-export function GameScore({score, maxScore}) {
+export function GameScore({score, maxScore}: {score: number; maxScore: number}) {
 	const percentage = Math.round(((score / maxScore) * 100) / 10) * 10;
 
 	const barColor = getBarColor(score);
