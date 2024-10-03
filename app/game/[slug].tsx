@@ -1,10 +1,19 @@
 import Back from '../../components/Back';
+import {getGameDetails} from '../../lib/metacritic';
+import {LatestGameBySlug} from '../../types/metacritic';
 import {Link, Stack, useLocalSearchParams} from 'expo-router';
+import {useEffect, useState} from 'react';
 
 import {Text, View} from 'react-native';
 
 export default function GameById() {
-	const {slug} = useLocalSearchParams();
+	const {slug} = useLocalSearchParams<{slug: string}>();
+
+	const [game, setGame] = useState<LatestGameBySlug>();
+
+	useEffect(() => {
+		setGame(getGameDetails(slug));
+	}, [slug]);
 
 	return (
 		<>
@@ -25,7 +34,7 @@ export default function GameById() {
 				<Link href="/">
 					<Text style={{color: '#fff'}}>Home</Text>
 				</Link>
-				<Text style={{color: '#fff'}}>{slug}</Text>
+				<Text style={{color: '#fff'}}>{JSON.stringify(game, null, 2)}</Text>
 			</View>
 		</>
 	);

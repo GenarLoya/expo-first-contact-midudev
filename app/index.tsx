@@ -1,5 +1,6 @@
-import {AnimatedGameCard} from '../components/Game/GameCard';
-import {LatestGame, getLatestGames} from '../lib/metacritic';
+import {getLatestGames} from '../lib/metacritic';
+import {LatestGame} from '../types/metacritic';
+import {AnimatedGameCard} from './game/_components/Game/GameCard';
 import {useEffect, useState} from 'react';
 
 import {FlatList, View} from 'react-native';
@@ -8,7 +9,7 @@ export default function Main() {
 	const [games, setGames] = useState<LatestGame[]>([]);
 
 	useEffect(() => {
-		getLatestGames().then((games) => setGames(games));
+		setGames(getLatestGames());
 	}, []);
 
 	return (

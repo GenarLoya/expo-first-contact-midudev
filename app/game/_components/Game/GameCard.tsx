@@ -1,4 +1,4 @@
-import {LatestGame} from '../../lib/metacritic';
+import {LatestGame} from '../../../../types/metacritic';
 import {GameScore} from './GameScore';
 import {Link} from 'expo-router';
 import {useEffect, useRef} from 'react';
