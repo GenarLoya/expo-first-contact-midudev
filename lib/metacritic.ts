@@ -10,12 +10,12 @@ export function getGameDetails(slug: string): LatestGameBySlug {
 	const game = latestGames.find((game) => game.slug === slug);
 
 	if (!game) {
-		throw new Error('Game not found');
+		throw new Error(`Game ${slug} not found`);
 	}
 
 	const lorem = new LoremIpsum();
 
-	const reviews = Array.from({length: 5}).map(() => ({
+	const reviews = Array.from({length: Math.floor(Math.random() * 50)}).map(() => ({
 		quote: lorem.generateSentences(10),
 		score: Math.floor(Math.random() * 100),
 		date: new Date().toISOString(),

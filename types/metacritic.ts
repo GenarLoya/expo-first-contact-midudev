@@ -22,12 +22,14 @@ export type LatestGameDataOrigin = {
 	};
 };
 
-type Reviews = {
+export type Review = {
 	quote: string;
 	score: number;
 	date: string;
 	author: string;
-}[];
+};
+
+type Reviews = Review[];
 
 export type LatestGameBySlug = LatestGame & {
 	reviews: Reviews;

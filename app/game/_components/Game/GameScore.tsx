@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		gap: 10,
 		marginLeft: 'auto',
-		backgroundColor: '#303640',
 	},
 	scoreText: {
 		fontWeight: 'bold',
