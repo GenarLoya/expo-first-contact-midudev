@@ -1,6 +1,6 @@
-import {getLatestGames} from '../lib/metacritic';
-import {LatestGame} from '../types/metacritic';
-import {AnimatedGameCard} from './game/_components/Game/GameCard';
+import {getLatestGames} from '../../../lib/metacritic';
+import {LatestGame} from '../../../types/metacritic';
+import {AnimatedGameCard} from '../../game/_components/Game/GameCard';
 import {useEffect, useState} from 'react';
 
 import {FlatList, View} from 'react-native';

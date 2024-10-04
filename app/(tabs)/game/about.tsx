@@ -1,4 +1,4 @@
-import Back from '../components/Back';
+import Back from '../../../components/Back';
 import {Link, Stack} from 'expo-router';
 
 import {ScrollView, Text, View} from 'react-native';

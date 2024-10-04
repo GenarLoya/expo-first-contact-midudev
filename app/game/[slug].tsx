@@ -6,7 +6,7 @@ import {ReviewCard} from './_components/Game/slug/ReviewCard';
 import {Link, Stack, useLocalSearchParams} from 'expo-router';
 import {useEffect, useState} from 'react';
 
-import {FlatList, Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 
 export default function GameById() {
 	const {slug} = useLocalSearchParams<{slug: string}>();
@@ -18,38 +18,23 @@ export default function GameById() {
 	}, [slug]);
 
 	return (
-		<>
-			<Stack.Screen
-				options={{
-					headerTitle: game?.title,
-					headerTitleStyle: {color: '#fff'},
-					headerLeft: ({label}) => (
-						<View style={{marginVertical: 'auto'}}>
-							<Link asChild href="/">
-								<Back />
-							</Link>
-						</View>
-					),
-					headerRight: () => null,
-				}}></Stack.Screen>
-			<View style={styles.card}>
-				<Text style={styles.title}>{game?.title}</Text>
-				<View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-					<Text style={{color: '#fff'}}>{game?.releaseDate}</Text>
-					<GameScore score={game?.score as number} maxScore={100} />
-				</View>
-				<View style={styles.body}>
-					<Image source={{uri: game?.image}} style={styles.image} />
-					<Text style={styles.description}>{game?.description}</Text>
-				</View>
-				<Text style={styles.reviewsSubTitle}>Reviews</Text>
-				<View style={styles.reviewCard}>
-					<FlatList
-						data={game?.reviews}
-						renderItem={({item}) => <ReviewCard review={item} />}></FlatList>
-				</View>
+		<View style={styles.card}>
+			<Text style={styles.title}>{game?.title}</Text>
+			<View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+				<Text style={{color: '#fff'}}>{game?.releaseDate}</Text>
+				<GameScore score={game?.score as number} maxScore={100} />
 			</View>
-		</>
+			<View style={styles.body}>
+				<Image source={{uri: game?.image}} style={styles.image} />
+				<Text style={styles.description}>{game?.description}</Text>
+			</View>
+			<Text style={styles.reviewsSubTitle}>Reviews</Text>
+			<View style={styles.reviewCard}>
+				<FlatList
+					data={game?.reviews}
+					renderItem={({item}) => <ReviewCard review={item} />}></FlatList>
+			</View>
+		</View>
 	);
 }
 
